@@ -19,7 +19,7 @@ namespace TankStudios.Objects
                     var mail = new MailMessage();
 
                     var smtpServer = new SmtpClient("smtp.gmail.com");
-                    smtpServer.Credentials = new System.Net.NetworkCredential("tankstudios.ryantankersley@gmail.com", "TankStudios1234!");
+                    smtpServer.Credentials = new System.Net.NetworkCredential("tankstudios.ryantankersley@gmail.com", "");
                     smtpServer.Port = 587;
                     smtpServer.Host = "smtp.gmail.com";
                     smtpServer.EnableSsl = true;
