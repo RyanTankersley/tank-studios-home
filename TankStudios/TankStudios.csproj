@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201505180213469_BlogsAndPosts.Designer.cs">
       <DependentUpon>201505180213469_BlogsAndPosts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505210225240_AddedSubtitle.cs" />
+    <Compile Include="Migrations\201505210225240_AddedSubtitle.Designer.cs">
+      <DependentUpon>201505210225240_AddedSubtitle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogModel.cs" />
@@ -314,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505180213469_BlogsAndPosts.resx">
       <DependentUpon>201505180213469_BlogsAndPosts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505210225240_AddedSubtitle.resx">
+      <DependentUpon>201505210225240_AddedSubtitle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

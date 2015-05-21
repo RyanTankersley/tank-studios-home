@@ -1,6 +1,14 @@
-﻿@{
+﻿@model TankStudios.Models.BlogModel
+
+@{
     ViewBag.Title = "Read";
 }
 
-<h2>@ViewBag.BlogName</h2>
-
+<div class="container">
+    <div class="row">
+        <div class="jumbotron" style="background-color:cornflowerblue">
+            <h1 style="color:white;">@Model.Title</h1>
+            <p style="color:white;">@Model.SubTitle</p>
+        </div>
+    </div>
+</div>

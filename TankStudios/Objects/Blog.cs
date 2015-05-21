@@ -11,6 +11,8 @@ namespace TankStudios.Objects
 
         public string Title { get; set; }
 
+        public string SubTitle { get; set; }
+
         public virtual List<BlogPost> BlogPosts { get; set; }
     }
 }
