@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TankStudios.Models;
+using TankStudios.Objects;
 
 namespace TankStudios.Controllers
 {
@@ -26,7 +27,9 @@ namespace TankStudios.Controllers
             var blog = context.Blogs.FirstOrDefault(b => b.Title == check);
             if (blog != null)
             {
-                var model = new BlogModel(blog.Title, blog.SubTitle);
+                var path = ImageTypeHelper.GetImageRelativePath(blog.ImageType);
+                var url = Url.Content(path);
+                var model = new BlogModel(blog.Title, blog.SubTitle, url);
                 return View(model);
             }
             else

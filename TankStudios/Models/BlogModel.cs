@@ -11,10 +11,13 @@ namespace TankStudios.Models
 
         public string SubTitle { get; set; }
 
-        public BlogModel(string title, string subTitle)
+        public string ImageLink { get; set; }
+
+        public BlogModel(string title, string subTitle, string imageLink)
         {
             this.Title = title;
             this.SubTitle = subTitle;
+            this.ImageLink = imageLink;
         }
     }
 }

@@ -207,6 +207,14 @@
     <Compile Include="Migrations\201505210225240_AddedSubtitle.Designer.cs">
       <DependentUpon>201505210225240_AddedSubtitle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505210326236_ImageLink.cs" />
+    <Compile Include="Migrations\201505210326236_ImageLink.Designer.cs">
+      <DependentUpon>201505210326236_ImageLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505210343175_ImageLinkToEnum.cs" />
+    <Compile Include="Migrations\201505210343175_ImageLinkToEnum.Designer.cs">
+      <DependentUpon>201505210343175_ImageLinkToEnum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogModel.cs" />
@@ -216,6 +224,7 @@
     <Compile Include="Objects\Blog.cs" />
     <Compile Include="Objects\BlogPost.cs" />
     <Compile Include="Objects\GmailMessageService.cs" />
+    <Compile Include="Objects\ImageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -273,8 +282,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -321,6 +328,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505210225240_AddedSubtitle.resx">
       <DependentUpon>201505210225240_AddedSubtitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505210326236_ImageLink.resx">
+      <DependentUpon>201505210326236_ImageLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505210343175_ImageLinkToEnum.resx">
+      <DependentUpon>201505210343175_ImageLinkToEnum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

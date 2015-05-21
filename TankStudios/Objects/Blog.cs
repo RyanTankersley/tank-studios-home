@@ -13,6 +13,8 @@ namespace TankStudios.Objects
 
         public string SubTitle { get; set; }
 
+        public ImageType ImageType { get; set; }
+
         public virtual List<BlogPost> BlogPosts { get; set; }
     }
 }
