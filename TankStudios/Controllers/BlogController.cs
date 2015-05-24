@@ -36,6 +36,11 @@ namespace TankStudios.Controllers
                 return HttpNotFound();
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         public void Dispose()
         {
             context.Dispose();
