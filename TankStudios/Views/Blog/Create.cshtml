@@ -1,15 +1,60 @@
-﻿
+﻿@model TankStudios.Models.CreateBlogPostModel
+
 @{
     ViewBag.Title = "Create";
 }        
+
 @*makes room for navbar*@
 <header style="height: 50px;">
 </header>
 <div class="container">
-    <h2>Create</h2>
-    asdf
-    asdf
-    asdf
-
-    <textarea>Easy! You should check out MoxieManager!</textarea>
+    <section id="createBlogForm">
+        @using (Html.BeginForm("Create", "Blog", new {  }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            <h4>Create a blog post.</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SelectedBlogId, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.SelectedBlogId, Model.BlogTitleSelectList, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SelectedBlogId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PostTitle, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.PostTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PostTitle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PostSubTitle, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.PostSubTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PostSubTitle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PostImageLink, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.PostImageLink, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PostImageLink, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PostHtml, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(m => m.PostHtml, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PostHtml, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+        }
+    </section>
 </div>

@@ -36,9 +36,45 @@ namespace TankStudios.Controllers
                 return HttpNotFound();
         }
 
+        public ActionResult ReadPost(string id)
+        {
+            return HttpNotFound();
+        }
         public ActionResult Create()
         {
-            return View();
+            if (!string.IsNullOrEmpty(User.Identity.Name))
+            {
+                var model = new CreateBlogPostModel();
+                model.BlogTitles = context.Blogs.Select(b => new BlogIdTitleModel() { Id = b.ID, Name = b.Title }).ToList();
+                return View(model);
+            }
+
+            return new HttpUnauthorizedResult();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CreateBlogPostModel model)
+        {
+            if(string.IsNullOrEmpty(User.Identity.Name))
+                return new HttpUnauthorizedResult();
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var blog = context.Blogs.SingleOrDefault(b => b.ID == model.SelectedBlogId);
+            if (blog == null)
+            {
+                ModelState.AddModelError("", "Invalid blog title");
+                return View(model);
+            }
+
+            var blogPost = BlogPost.Create(blog, model.PostHtml, model.PostTitle, model.PostSubTitle, model.PostImageLink);
+            context.Posts.Add(blogPost);
+            context.SaveChanges();
+            blog = context.Blogs.SingleOrDefault(b => b.ID == model.SelectedBlogId);
+            var post = blog.BlogPosts.Last();
+            return RedirectToAction("ReadPost", new object[] { post.ID.ToString() });
         }
 
         public void Dispose()

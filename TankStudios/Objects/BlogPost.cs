@@ -19,6 +19,23 @@ namespace TankStudios.Objects
         
         public string Title { get; set; }
 
+        public string SubTitle { get; set; }
+        
         public string CoverImageLink { get; set; }
+
+        public static BlogPost Create(Blog blog, string content, string title, string subTitle, string coverImageLink)
+        {
+            var post = new BlogPost()
+            {
+                Blog = blog,
+                BlogID = blog.ID,
+                DatePublished = DateTime.Now,
+                Content = content,
+                Title = title,
+                SubTitle = subTitle,
+                CoverImageLink = coverImageLink
+            };
+            return post;
+        }
     }
 }
