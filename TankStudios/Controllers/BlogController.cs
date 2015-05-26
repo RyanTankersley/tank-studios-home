@@ -30,6 +30,8 @@ namespace TankStudios.Controllers
                 var path = ImageTypeHelper.GetImageRelativePath(blog.ImageType);
                 var url = Url.Content(path);
                 var model = new BlogModel(blog.Title, blog.SubTitle, url);
+                var posts = context.Posts.Where(p => p.BlogID == blog.ID).ToList();
+                model.Posts.AddRange(posts.Select(bp => new PostModel() { Title = bp.Title, SubTitle = bp.SubTitle, ImageLink = Url.Content(bp.CoverImageLink) }));
                 return View(model);
             }
             else

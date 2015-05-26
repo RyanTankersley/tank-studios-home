@@ -19,5 +19,34 @@
     </div>
 </header>
 <section>
+    <div class="container">
+        @{int count = 0; }
 
+        @foreach (var post in Model.Posts)
+        {
+            <a style="color: black;" href="@Url.Action(controllerName: "Blog", actionName: "ReadPost", routeValues: new { id = post.Title })">
+                <div class="row" style="border: groove; cursor: pointer;">
+                    <div class="col-xs-12" style="text-align: center;">
+                        <h1>@post.Title</h1>
+                        <hr style="background-color:black; color:black; height:1pt; border:hidden;" />
+                    </div>
+                    <div class="col-xs-12">
+                        <img style="height: 200px; width:200px; margin-left:auto; margin-right: auto; display: block;" src="@Model.ImageLink" alt="">
+                    </div>
+                    <div class="col-xs-12" style="text-align: center; margin-top: 10px;">
+                        <p style="font-size: 22pt;">@post.SubTitle</p>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
 </section>
+
+<script>
+
+function DivClicked()
+{
+    
+}
+
+</script>

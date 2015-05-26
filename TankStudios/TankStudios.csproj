@@ -227,6 +227,7 @@
     <Compile Include="Models\CreateBlogPostModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PostModel.cs" />
     <Compile Include="Objects\Blog.cs" />
     <Compile Include="Objects\BlogPost.cs" />
     <Compile Include="Objects\GmailMessageService.cs" />
