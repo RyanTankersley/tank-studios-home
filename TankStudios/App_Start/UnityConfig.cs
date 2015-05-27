@@ -6,6 +6,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using TankStudios.Controllers;
+using TankStudios.Interfaces;
+using TankStudios.Objects;
 
 namespace TankStudios.App_Start
 {
@@ -50,7 +52,8 @@ namespace TankStudios.App_Start
 
             container.RegisterType<AccountController>(
                 new InjectionConstructor());
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            
+             container.RegisterType<IContactService, GmailMessageService>();
         }
     }
 }
