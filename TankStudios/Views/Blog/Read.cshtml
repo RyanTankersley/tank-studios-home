@@ -24,7 +24,7 @@
 
         @foreach (var post in Model.Posts)
         {
-            <a style="color: black;" href="@Url.Action(controllerName: "Blog", actionName: "ReadPost", routeValues: new { id = post.Title })">
+            <a style="color: black;" href="@Url.Action(controllerName: "Blog", actionName: "ReadPost", routeValues: new { id = post.Id })">
                 <div class="row" style="border: groove; cursor: pointer;">
                     <div class="col-xs-12" style="text-align: center;">
                         <h1>@post.Title</h1>
@@ -41,12 +41,3 @@
         }
     </div>
 </section>
-
-<script>
-
-function DivClicked()
-{
-    
-}
-
-</script>

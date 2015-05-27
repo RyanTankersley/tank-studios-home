@@ -31,7 +31,7 @@ namespace TankStudios.Controllers
                 var url = Url.Content(path);
                 var model = new BlogModel(blog.Title, blog.SubTitle, url);
                 var posts = context.Posts.Where(p => p.BlogID == blog.ID).ToList();
-                model.Posts.AddRange(posts.Select(bp => new PostModel() { Title = bp.Title, SubTitle = bp.SubTitle, ImageLink = Url.Content(bp.CoverImageLink) }));
+                model.Posts.AddRange(posts.Select(bp => new PostModel() { Title = bp.Title, SubTitle = bp.SubTitle, ImageLink = Url.Content(bp.CoverImageLink), Id = bp.ID }));
                 return View(model);
             }
             else
@@ -40,8 +40,22 @@ namespace TankStudios.Controllers
 
         public ActionResult ReadPost(string id)
         {
-            return HttpNotFound();
+            var post = context.Posts.SingleOrDefault(p => p.ID.ToString() == id);
+            if (post == null)
+                return new HttpNotFoundResult();
+
+            var model = new ReadPostModel()
+            {
+                Id = post.ID,
+                Content = post.Content,
+                Title = post.Title,
+                SubTitle = post.SubTitle,
+                ImageLink = Url.Content(post.CoverImageLink)
+            };
+
+            return View(model);
         }
+
         public ActionResult Create()
         {
             if (!string.IsNullOrEmpty(User.Identity.Name))
