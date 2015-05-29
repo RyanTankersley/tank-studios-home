@@ -189,3 +189,5 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 TankStudios/Objects/GmailMessageService.cs
+TankStudios/Web.config
+TankStudios/Properties/PublishProfiles/TankStudiosTech.pubxml

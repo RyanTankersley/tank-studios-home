@@ -12,7 +12,7 @@
                 <div class="intro-text">
                     <span class="name">@Model.Title</span>
                     <hr>
-                    <span class="skills">@Model.ImageLink</span><br />
+                    <span class="skills">@Model.SubTitle</span><br />
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
 </header>
 <section>
     <div class="container">
-        <div  class="row" style="padding: 5px;">
+        <div  class="row blog-post" style="padding: 5px;">
             @Html.Raw(Model.Content);
         </div>
     </div>
