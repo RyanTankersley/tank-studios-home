@@ -17,6 +17,13 @@ namespace TankStudios.Objects
 
         public string Content { get; set; }
         
+        public string FixedContent { get
+            {
+                var newContent = this.Content.Replace("*!", "/>").Replace("!*", "<");
+                return newContent;
+            }
+        }
+
         public string Title { get; set; }
 
         public string SubTitle { get; set; }

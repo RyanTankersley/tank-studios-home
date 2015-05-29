@@ -22,22 +22,25 @@
     <div class="container">
         @{int count = 0; }
 
-        @foreach (var post in Model.Posts)
+        @foreach (var post in Model.Posts.OrderByDescending(p => p.DatePosted))
         {
-            <a style="color: black;" href="@Url.Action(controllerName: "Blog", actionName: "ReadPost", routeValues: new { id = post.Id })">
-                <div class="row" style="border: groove; cursor: pointer;">
-                    <div class="col-xs-12" style="text-align: center;">
-                        <h1>@post.Title</h1>
-                        <hr style="background-color:black; color:black; height:1pt; border:hidden;" />
+            <div style="margin-bottom: 50px; border: groove;">
+                <a style="color: black; margin-bottom: 50px;" href="@Url.Action(controllerName: "Blog", actionName: "ReadPost", routeValues: new { id = post.Id })">
+                    <div class="row">
+                        <div class="col-xs-12" style="text-align: center;">
+                            <h1>@post.Title</h1>
+                            <p>@post.DatePosted.ToString("MMMM dd, yyyy")</p>
+                            <hr style="background-color:gray; color:gray; height:1pt; border:hidden;" />
+                        </div>
+                        <div class="col-xs-12">
+                            <img style="height: 300px; width:300px; margin-left:auto; margin-right: auto; display: block;" src="@post.ImageLink" alt="">
+                        </div>
+                        <div class="col-xs-12" style="text-align: center; margin-top: 10px;">
+                            <p style="font-size: 22pt;">@post.SubTitle</p>
+                        </div>
                     </div>
-                    <div class="col-xs-12">
-                        <img style="height: 200px; width:200px; margin-left:auto; margin-right: auto; display: block;" src="@Model.ImageLink" alt="">
-                    </div>
-                    <div class="col-xs-12" style="text-align: center; margin-top: 10px;">
-                        <p style="font-size: 22pt;">@post.SubTitle</p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
         }
     </div>
 </section>

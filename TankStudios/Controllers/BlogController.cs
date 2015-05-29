@@ -31,7 +31,7 @@ namespace TankStudios.Controllers
                 var url = Url.Content(path);
                 var model = new BlogModel(blog.Title, blog.SubTitle, url);
                 var posts = context.Posts.Where(p => p.BlogID == blog.ID).ToList();
-                model.Posts.AddRange(posts.Select(bp => new PostModel() { Title = bp.Title, SubTitle = bp.SubTitle, ImageLink = Url.Content(bp.CoverImageLink), Id = bp.ID }));
+                model.Posts.AddRange(posts.Select(bp => new PostModel() { Title = bp.Title, SubTitle = bp.SubTitle, ImageLink = bp.CoverImageLink.StartsWith("~") ? Url.Content(bp.CoverImageLink) : bp.CoverImageLink, Id = bp.ID, DatePosted = bp.DatePublished }));
                 return View(model);
             }
             else
@@ -47,21 +47,33 @@ namespace TankStudios.Controllers
             var model = new ReadPostModel()
             {
                 Id = post.ID,
-                Content = post.Content,
+                Content = post.FixedContent,
                 Title = post.Title,
                 SubTitle = post.SubTitle,
-                ImageLink = Url.Content(post.CoverImageLink)
+                ImageLink = post.CoverImageLink.StartsWith("~") ? Url.Content(post.CoverImageLink) : post.CoverImageLink
             };
 
             return View(model);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(string id = null)
         {
             if (!string.IsNullOrEmpty(User.Identity.Name))
             {
-                var model = new CreateBlogPostModel();
-                model.BlogTitles = context.Blogs.Select(b => new BlogIdTitleModel() { Id = b.ID, Name = b.Title }).ToList();
+                CreateBlogPostModel model;
+                var blogTitles = context.Blogs.Select(b => new BlogIdTitleModel() { Id = b.ID, Name = b.Title }).ToList();
+                if (id != null)
+                {
+                    var post = context.Posts.SingleOrDefault(p => p.ID.ToString() == id);
+                    if (post == null)
+                        return new HttpNotFoundResult();
+                    model = CreateBlogPostModel.CreateFromPost(post, blogTitles);
+                }
+                else
+                {
+                    model = CreateBlogPostModel.CreateEmpty(blogTitles);
+                }
+
                 return View(model);
             }
 
@@ -85,12 +97,31 @@ namespace TankStudios.Controllers
                 return View(model);
             }
 
-            var blogPost = BlogPost.Create(blog, model.PostHtml, model.PostTitle, model.PostSubTitle, model.PostImageLink);
-            context.Posts.Add(blogPost);
+            BlogPost post;
+            if (model.Id == null)
+            {
+                var blogPost = BlogPost.Create(blog, model.PostHtml, model.PostTitle, model.PostSubTitle, model.PostImageLink);
+                context.Posts.Add(blogPost);
+                post = blogPost;
+            }
+            else
+            {
+                var contextPost = context.Posts.SingleOrDefault(p => p.ID.ToString() == model.Id);
+                if (contextPost == null)
+                    return new HttpNotFoundResult();
+
+                var entry = context.Entry(contextPost);
+                entry.Entity.Title = model.PostTitle;
+                entry.Entity.SubTitle = model.PostSubTitle;
+                entry.Entity.Content = model.PostHtml;
+                entry.Entity.CoverImageLink = model.PostImageLink;
+                entry.State = System.Data.Entity.EntityState.Modified;
+                post = contextPost;
+            }
+
             context.SaveChanges();
-            blog = context.Blogs.SingleOrDefault(b => b.ID == model.SelectedBlogId);
-            var post = blog.BlogPosts.Last();
-            return RedirectToAction("ReadPost", new object[] { post.ID.ToString() });
+
+            return RedirectToAction("ReadPost", new { id= post.ID.ToString() });
         }
 
         public void Dispose()
